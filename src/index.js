@@ -22,17 +22,25 @@ let el = () => {
   }
 }
 
+class Welcome extends React.Component {
+  render() {
+    return <p>Hi, {this.props.name}</p>;
+  }
+}
+
+const Welcome2 = props => <p>Hi, {props.name}. You are {props.age} year old.</p>;
 
 const root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
     {el()}
+    <Welcome name="jiro" />
+    <Welcome name="saburo" />
+    <Welcome name="shiro" />
+    <Welcome2 name="goro" age="55" />
   </React.StrictMode>,
   root
 );
-
-el = 'changed';
-ReactDOM.render(el, root)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
