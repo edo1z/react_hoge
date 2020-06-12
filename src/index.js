@@ -4,11 +4,29 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const name = '田中　景';
+const func = () => 10 + 15;
+const el = () => {
+  if (name === '田中　景') {
+    return (
+      <p className="tanaka">
+        こんにちは、{name} {func()+'才'}
+      </p>
+    )
+  } else {
+    return (
+      <p>
+        こんにちは。
+      </p>
+    )
+  }
+}
+
+
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
-  <div>わっはっはっは</div>,
+  <React.StrictMode>
+    {el()}
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
