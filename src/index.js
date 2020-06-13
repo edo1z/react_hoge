@@ -9,8 +9,10 @@ class Clock extends React.Component {
     super(props);
     this.state = {
       id: props.id,
+      active: true,
       date: new Date()
     };
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -22,9 +24,18 @@ class Clock extends React.Component {
   }
 
   tick() {
-    this.setState({
-      date: new Date()
-    })
+    if (this.state.active) {
+      this.setState({
+        date: new Date()
+      })
+    }
+  }
+
+  handleClick(a, b, id, e) {
+    e.preventDefault();
+    console.log(id + 'がクリックされました');
+    console.log(this.state.id);
+    this.setState(state => ({active: !state.active}));
   }
 
   render() {
@@ -32,6 +43,12 @@ class Clock extends React.Component {
       <div>
         <p>Clock - {this.state.id}</p>
         {this.state.date.toLocaleTimeString()}
+        <a
+          href="https://google.com"
+          onClick={this.handleClick.bind(this, 10, 20, this.state.id)}
+        >
+          Delete
+        </a>
       </div>
     );
   }
