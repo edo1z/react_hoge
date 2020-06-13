@@ -4,40 +4,45 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const name = '田中　景';
-const func = () => 10 + 15;
-let el = () => {
-  if (name === '田中　景') {
-    return (
-      <p className="tanaka">
-        こんにちは、{name} {func()+'才'}
-      </p>
-    );
-  } else {
-    return (
-      <p>
-        こんにちは。
-      </p>
-    );
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: props.id,
+      date: new Date()
+    };
   }
-}
 
-class Welcome extends React.Component {
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    })
+  }
+
   render() {
-    return <p>Hi, {this.props.name}</p>;
+    return (
+      <div>
+        <p>Clock - {this.state.id}</p>
+        {this.state.date.toLocaleTimeString()}
+      </div>
+    );
   }
 }
-
-const Welcome2 = props => <p>Hi, {props.name}. You are {props.age} year old.</p>;
 
 const root = document.getElementById('root');
 ReactDOM.render(
   <React.StrictMode>
-    {el()}
-    <Welcome name="jiro" />
-    <Welcome name="saburo" />
-    <Welcome name="shiro" />
-    <Welcome2 name="goro" age="55" />
+    <Clock id="1" />
+    <Clock id="2" />
+    <Clock id="3" />
   </React.StrictMode>,
   root
 );
